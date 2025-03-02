@@ -1,0 +1,81 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* desing inside the container */
+
+.container{
+
+    width: 100%;
+    max-width: 320px;
+    margin: 50px  auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px rgb(164, 162, 162);
+
+}
+
+/* label desing */
+label{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+/* Form header */
+
+h3{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+
+
+input{
+    width: 100%;
+    padding: 8px;
+    margin: 12px 0;
+    border: 1px solid gray;
+    border-radius: 4px;
+}
+
+.password-div{
+    position: relative;
+
+}
+
+.fa-solid{
+    position: absolute;
+    top:41px;
+    right: 4px;
+}
+
+button:hover {
+    background-color: rgb(129, 61, 213);
+}
+
+button{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(155, 155, 236);
+    color: white;
+   cursor: pointer;
+};
+
+.confirm-password-div{
+    position: relative;
+}
+
+.fa-solid{
+    position: absolute;
+    top:41px;
+    right: 4px;
+}
