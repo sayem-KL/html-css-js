@@ -1,32 +1,64 @@
-// Get the password input field and the eye icons
-const passwordField = document.getElementById("password");
-const eyeIcon = document.querySelector(".fa-eye");
-const eyeSlashIcon = document.querySelector(".fa-eye-slash");
+// script.js
 
-// Add event listener to the eye icon to toggle password visibility
-eyeIcon.addEventListener("click", function() {
-  // Toggle the password visibility and icons
-  if (passwordField.type === "password") {
-    passwordField.type = "text"; // Show password
-    eyeIcon.style.display = "none"; // Hide eye icon
-    eyeSlashIcon.style.display = "block"; // Show eye-slash icon
-  } else {
-    passwordField.type = "password"; // Hide password
-    eyeIcon.style.display = "block"; // Show eye icon
-    eyeSlashIcon.style.display = "none"; // Hide eye-slash icon
-  }
-});
+let balance = 0;
+let history = [];
 
-// Add event listener to the eye-slash icon to toggle password visibility
-eyeSlashIcon.addEventListener("click", function() {
-  // Toggle the password visibility and icons
-  if (passwordField.type === "password") {
-    passwordField.type = "text"; // Show password
-    eyeIcon.style.display = "none"; // Hide eye icon
-    eyeSlashIcon.style.display = "block"; // Show eye-slash icon
-  } else {
-    passwordField.type = "password"; // Hide password
-    eyeIcon.style.display = "block"; // Show eye icon
-    eyeSlashIcon.style.display = "none"; // Hide eye-slash icon
-  }
-});
+const balanceElement = document.getElementById("balance");
+const amountElement = document.getElementById("amount");
+const historyList = document.getElementById("historyList");
+const notificationElement = document.getElementById("notification");
+
+const updateBalance = () => {
+    balanceElement.textContent = balance;
+};
+
+const updateHistory = () => {
+    historyList.innerHTML = "";
+    history.forEach(transaction => {
+        const li = document.createElement("li");
+        li.textContent = transaction;
+        historyList.appendChild(li);
+    });
+};
+
+const showNotification = (message) => {
+    notificationElement.textContent = message;
+    setTimeout(() => {
+        notificationElement.textContent = "";
+    }, 3000);
+};
+
+const deposit = () => {
+    const amount = parseFloat(amountElement.value);
+    if (isNaN(amount) || amount <= 0) {
+        showNotification("Please enter a valid deposit amount.");
+        return;
+    }
+    balance += amount;
+    history.push(`Deposited: ${amount} tk`);
+    updateBalance();
+    updateHistory();
+    showNotification(`Successfully deposited tk ${amount} tk`);
+    amountElement.value = "";
+};
+
+const withdraw = () => {
+    const amount = parseFloat(amountElement.value);
+    if (isNaN(amount) || amount <= 0) {
+        showNotification("Please enter a valid withdrawal amount.");
+        return;
+    }
+    if (amount > balance) {
+        showNotification("Insufficient balance.");
+        return;
+    }
+    balance -= amount;
+    history.push(`Withdrew: ${amount} tk`);
+    updateBalance();
+    updateHistory();
+    showNotification(`Successfully withdrew tk ${amount} tk`);
+    amountElement.value = "";
+};
+
+document.getElementById("depositBtn").addEventListener("click", deposit);
+document.getElementById("withdrawBtn").addEventListener("click", withdraw);
